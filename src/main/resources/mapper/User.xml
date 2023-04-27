@@ -1,0 +1,82 @@
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+	<mapper namespace="User">
+		<insert id="User_insert" parameterType="UserDto">
+			insert into public."USER"
+			(
+				user_id
+				,user_nm
+				,user_eml
+				,user_dept_no
+				,user_telno
+				,user_addr
+			)
+			values
+			(
+				#{user_id}
+				,#{user_nm}
+				,#{user_eml}
+				,#{user_dept_no}
+				,#{user_telno}
+				,#{user_addr}
+			)
+		</insert>
+		<select id="user_list" parameterType="UserDto" resultType="UserDto">
+				select *
+				from "USER" as a 
+				left outer join "DEPT" as b 
+					on a.user_dept_no = b.dept_no
+		</select>
+		<select id="user_info" parameterType="UserDto" resultType="UserDto">
+				select *
+					from "USER" as a 
+					left outer join "DEPT" as b 
+						on a.user_dept_no = b.dept_no
+						where a.user_id=#{user_id}
+		</select>
+		<select id="user_hobby_info" parameterType="UserDto" resultType="UserDto">
+				select user_id,hobby_nm,a.hobby_cd
+					from "hobby_data" as a
+						left outer join "hobby" as b
+						 on a.hobby_cd=b.hobby_cd
+						 where a.user_id=#{user_id}
+		</select>
+		<update id="user_update" parameterType="UserDto">
+		update public."USER" set
+			(
+				user_id
+				,user_nm
+				,user_eml
+				,user_dept_no
+				,user_telno
+				,user_addr
+				,user_aprv_yn
+			)
+			=
+			(
+				#{user_id}
+				,#{user_nm}
+				,#{user_eml}
+				,#{user_dept_no}
+				,#{user_telno}
+				,#{user_addr}
+				,#{user_aprv_yn}
+			)
+			where user_id=#{user_id}
+		</update>
+		<delete id="user_Delete" parameterType="UserDto">
+			delete from public."USER" where user_id=#{user_id}
+		</delete>
+		<select id="searchUser" parameterType="UserDto" resultType="UserDto">
+			select *
+				from "USER" as a 
+				left outer join "DEPT" as b 
+					on a.user_dept_no = b.dept_no
+				where user_id like '%'||#{searchKeyword}||'%'
+		</select>
+		<select id="user_idCheck" parameterType="UserDto" resultType="Integer">
+			select count(*) from "USER" where user_id=#{user_id}
+		</select>
+	</mapper>

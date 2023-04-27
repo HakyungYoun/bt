@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+	<mapper namespace="HobbyData">
+	<insert id="hobby_insert" parameterType="HobbyDataDto">
+		insert into public."hobby_data"
+			(
+			user_id
+			,hobby_cd
+			)
+		values
+			(
+			#{user_id}
+			,#{hobby_cd}	
+			)
+		
+	
+	</insert>
+	<delete id="hobby_delete" parameterType="HobbyDataDto">
+		delete from "hobby_data" where user_id=#{user_id}
+	</delete>
+	</mapper>
