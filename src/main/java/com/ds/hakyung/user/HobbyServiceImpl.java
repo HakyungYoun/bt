@@ -22,7 +22,12 @@ public class HobbyServiceImpl implements HobbyService{
 	}
 	@Override
 	public void insertHobby(HobbyDataDto dto2) {
-		dao.insertHobby(dto2);
+		String hobby_cd=dto2.getHobby_cd();
+		String[] values = hobby_cd.split(",");
+		for (String value : values) {
+			dto2.setHobby_cd(value);
+			dao.insertHobby(dto2);
+		}
 	}
 	@Override
 	public void delete(HobbyDataDto dto2) {
