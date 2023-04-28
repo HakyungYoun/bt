@@ -74,7 +74,7 @@
 				from "USER" as a 
 				left outer join "DEPT" as b 
 					on a.user_dept_no = b.dept_no
-				where user_id like '%'||#{searchKeyword}||'%'
+				where user_nm like '%'||#{searchKeyword}||'%'
 		</select>
 		<select id="user_idCheck" parameterType="UserDto" resultType="Integer">
 			select count(*) from "USER" where user_id=#{user_id}
