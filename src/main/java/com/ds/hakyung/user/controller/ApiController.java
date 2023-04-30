@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ds.hakyung.user.DeptService;
@@ -60,7 +61,7 @@ public class ApiController {
 		return service.getSearchList(dto3);
 	}
 	@GetMapping("/userInfo")
-	public UserDto userInfo1(UserDto dto3) {
+	public UserDto userInfo(UserDto dto3) {
 		return service.getInfo(dto3);
 	}
 	@GetMapping("/userHobbyInfo")
